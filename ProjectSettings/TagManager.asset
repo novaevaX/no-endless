@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - fire
+  - speedCrystal
+  - lifeCrystal
+  - Destroyer
+  - gold
   layers:
   - Default
   - TransparentFX
@@ -42,4 +46,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: New Layer 1
+    uniqueID: 2795887191
     locked: 0

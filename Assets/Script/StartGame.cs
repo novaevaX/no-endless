@@ -9,4 +9,14 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene",LoadSceneMode.Single);
     }
+
+    public void UpdateButtonClick()
+    {
+        SceneManager.LoadScene("UpdateCharaters", LoadSceneMode.Single);
+    }
+
+    public void ReturnButton()
+    {
+        SceneManager.LoadScene("FirstScene", LoadSceneMode.Single);
+    }
 }
