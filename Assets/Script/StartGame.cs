@@ -19,4 +19,9 @@ public class StartGame : MonoBehaviour
     {
         SceneManager.LoadScene("FirstScene", LoadSceneMode.Single);
     }
+
+    public void ResetAllButton()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

@@ -113,18 +113,20 @@ public class Player : MonoBehaviour
                 currentLife++;
                 isEnemyAttack = true;
             }
+            isLifeCrystal = false;
         }
 
         if (isEnemyAttack)
         {
-            for (int i = 6; i > 0; i--)
+            isEnemyAttack = false;
+            for (int i = 0; i < 6; i++)
             {
-                if (i > currentLife)
+                if (i >= currentLife)
                 {
-                    life[i-1].SetActive(false);
+                    life[i].SetActive(false);
                 } else
                 {
-                    life[i-1].SetActive(true);
+                    life[i].SetActive(true);
                 } 
             }
 
@@ -135,9 +137,7 @@ public class Player : MonoBehaviour
                 PlayerPrefs.SetInt("money", money);
                 Destroy(this.gameObject);
                 SceneManager.LoadScene("FirstScene", LoadSceneMode.Single);
-            }
-
-            isEnemyAttack = false;
+            }  
         }
     }
 
