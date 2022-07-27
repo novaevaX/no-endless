@@ -30,7 +30,8 @@ public class Player : MonoBehaviour
     private float timerStartSpeedMode = 0f;
     private bool isLifeCrystal = false;
 
-    private int monneyInRun = 0;
+    private int moneyInRun = 0;
+    private int money;
     private void Start()
     {
         shipLife = PlayerPrefs.GetInt("shipLife");
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour
         }
         if (collision.collider.CompareTag("gold"))
         {
-            monneyInRun++;
+            moneyInRun++;
         }
     }
 
@@ -129,6 +130,9 @@ public class Player : MonoBehaviour
 
             if (currentLife == 0)
             {
+                money = PlayerPrefs.GetInt("money");
+                money += moneyInRun;
+                PlayerPrefs.SetInt("money", money);
                 Destroy(this.gameObject);
                 SceneManager.LoadScene("FirstScene", LoadSceneMode.Single);
             }

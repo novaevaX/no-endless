@@ -13,6 +13,7 @@ public class PlayerPREFS : MonoBehaviour
     private int superAttack; // for upgrade bonus speed attack
     private int shipSpeed; // for upgrade horizontal ship speed
     private int shipattack; // for upgrade strength ship attack
+    private int costUpgrade; //cost next upgrade
 
     private void Update()
     {
