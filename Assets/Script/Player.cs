@@ -10,13 +10,18 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject speedMode;
 
     private Vector2 start = new Vector2(0, -3f);
-    private float horizontalspeed = 2.5f;
+    private int shipSpeed;
+    private float horizontalspeed = 2f;
+    private float addSpeed = .25f;
     private float direction = 0f;
     private bool leftBut = false;
     private bool rightBut = false;
 
-    private float timer = .35f;
-    private float setTimer = .35f;
+    private int speedAttack;
+    private float addSpeedAttack = .04f;
+    private float timer = .5f;
+    private float setTimer;
+    private float standartTimer = .5f;
     private bool isAttack = true;
 
     private int playerLife = 2; // after add upgrade -> full time constant
@@ -24,14 +29,18 @@ public class Player : MonoBehaviour
     private int shipLife;
     private bool isEnemyAttack = true;
 
+    private int superAttack;
+    private float addBonusSpeedAttack = .035f;
+    private float standartBonusTimer = .3f;
     private bool isSpeedCrystal = false;
     private bool returnSpeed = false;
     private bool speedParametrUpdate = false;
     private float timerStartSpeedMode = 0f;
     private bool isLifeCrystal = false;
 
-    private int moneyInRun = 0;
+    public int moneyInRun = 0;
     private int money;
+
     private void Start()
     {
         shipLife = PlayerPrefs.GetInt("shipLife");
@@ -39,6 +48,12 @@ public class Player : MonoBehaviour
         currentLife = playerLife;
         this.transform.position = start;
         speedMode.SetActive(false);
+
+        speedAttack = PlayerPrefs.GetInt("speedAttack");
+        superAttack = PlayerPrefs.GetInt("superAttack");
+        shipSpeed = PlayerPrefs.GetInt("shipSpeed");
+
+        setTimer = (standartTimer - speedAttack * addSpeedAttack);
     }
 
     private void FixedUpdate()
@@ -49,6 +64,7 @@ public class Player : MonoBehaviour
         TimerAttack();
         LifeUpdate();
         SpeedModeUpdate();
+        Debug.Log(standartTimer - (speedAttack * addSpeedAttack));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -148,7 +164,7 @@ public class Player : MonoBehaviour
         {
             isSpeedCrystal = false;
             speedParametrUpdate = true;
-            setTimer = .20f;
+            setTimer = ( standartBonusTimer - ( addBonusSpeedAttack * superAttack ) );
             timerStartSpeedMode = 10f;
         }
 
@@ -168,8 +184,8 @@ public class Player : MonoBehaviour
         //3
          if (returnSpeed && !speedParametrUpdate)
          {
-             setTimer = .35f;
-             returnSpeed = false;
+            setTimer = (standartTimer - ( speedAttack * addSpeedAttack ) );
+            returnSpeed = false;
          }
     }
     // End work with collection items
@@ -216,11 +232,11 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButton("Horizontal"))
         {
-            Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * horizontalspeed * Time.deltaTime, 0, 0);
+            Vector3 movement = new Vector3(Input.GetAxis("Horizontal") * ( horizontalspeed + ( addSpeed * shipSpeed ) ) * Time.deltaTime, 0, 0);
             this.transform.position += movement;
         }
 
-        Vector3 move = new Vector3(direction * horizontalspeed * Time.deltaTime, 0, 0);
+        Vector3 move = new Vector3(direction * ( horizontalspeed + ( addSpeed * shipSpeed ) ) * Time.deltaTime, 0, 0);
         this.transform.position += move;
 
         //

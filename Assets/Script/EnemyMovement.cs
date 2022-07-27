@@ -6,7 +6,16 @@ public class EnemyMovement : MonoBehaviour
 {
     private float enemySpeed = 2.5f;
     private float direction = -1f;
-    private int life = 3;
+    private float life = 3f;
+
+    private float strengthAttack = 1f;
+    private float addAttack = .5f;
+    private int shipattack;
+
+    private void Start()
+    {
+        shipattack = PlayerPrefs.GetInt("shipattack");
+    }
     void FixedUpdate()
     {
         Movement();
@@ -22,13 +31,13 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.collider.CompareTag("fire"))
         {
-            life--;
+            life -= ( strengthAttack + addAttack * shipattack );
         }
     }
 
     private void EnemyLife()
     {
-        if(life == 0)
+        if(life < 0.5f)
         {
             Destroy(this.gameObject);
         }
