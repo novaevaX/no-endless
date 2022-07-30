@@ -15,4 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/UpdateCharaters.unity
     guid: a23bcd163ebf1584eadf69211569bfdb
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 23b9c8f7b3cc730468b8d851473f4e11, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 440c0f4ed71afe044a2293d05b7d8357, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 77f184246ba08ca4c948a7c9cc927ca6, type: 2}

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject explosion;
+
     private float enemySpeed = 2.5f;
     private float direction = -1f;
     private float life = 3f;
@@ -39,6 +41,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if(life < 0.5f)
         {
+            Instantiate(explosion, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
