@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private GameObject attack;
     [SerializeField] private GameObject[] life;
+    [SerializeField] private GameObject explosionPlayer;
     [SerializeField] private GameObject speedMode;
+    [SerializeField]private Renderer renderer;
 
     private Vector2 start = new Vector2(0, -3f);
     private int shipSpeed;
@@ -28,6 +29,12 @@ public class Player : MonoBehaviour
     private int currentLife; // upgrade with time (add bonus or attack enemy)
     private int shipLife;
     private bool isEnemyAttack = true;
+    private bool isDead = false;
+    private Color colorDef = Color.white;
+    private Color colorRed = Color.red;
+    private bool isChangeColor = false;
+    private float timeColor = .13f;
+    private float timeColorConst = .13f;
 
     private int superAttack;
     private float addBonusSpeedAttack = .035f;
@@ -64,7 +71,8 @@ public class Player : MonoBehaviour
         TimerAttack();
         LifeUpdate();
         SpeedModeUpdate();
-        Debug.Log(standartTimer - (speedAttack * addSpeedAttack));
+        TimerDestroy();
+        ChangeColorShip();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -73,6 +81,7 @@ public class Player : MonoBehaviour
         {
             isEnemyAttack = true;
             currentLife--;
+            isChangeColor = true;
             Destroy(collision.gameObject);
         }
 
@@ -151,10 +160,38 @@ public class Player : MonoBehaviour
                 money = PlayerPrefs.GetInt("money");
                 money += moneyInRun;
                 PlayerPrefs.SetInt("money", money);
-                Destroy(this.gameObject);
-                SceneManager.LoadScene("FirstScene", LoadSceneMode.Single);
+                isDead = true;
+                Destroy(this.gameObject);                
             }  
         }
+    }
+
+    private void ChangeColorShip()
+    {
+        if (isChangeColor)
+        {
+            if (timeColor > 0 )
+            {
+                renderer.material.color = colorRed;
+                timeColor -= Time.deltaTime;
+            } else
+            {
+                renderer.material.color = colorDef;
+                isChangeColor = false;
+                timeColor = timeColorConst;
+            }
+            
+        }
+
+    }
+
+    private void TimerDestroy()
+    {
+        if (isDead)
+        {
+            Instantiate(explosionPlayer, transform.position, transform.rotation);
+        }
+
     }
 
     private void SpeedModeUpdate()

@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void EnemyLife()
     {
-        if(life < 0.5f)
+        if(life <= 0)
         {
             Instantiate(explosion, new Vector3(this.transform.position.x, this.transform.position.y, 0), Quaternion.identity);
             Destroy(this.gameObject);

@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 49d52dcaf7e7ed74f943b1b265594481, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3600481, g: 0.8773585, b: 0.48780745, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -339,7 +339,9 @@ MonoBehaviour:
   - {fileID: 203914612}
   - {fileID: 1571737369}
   - {fileID: 2079454499}
+  explosionPlayer: {fileID: 739145483698542858, guid: 6bae04d68623a8b41aeb94f200eff57a, type: 3}
   speedMode: {fileID: 1346501236}
+  renderer: {fileID: 1384915772}
   moneyInRun: 0
 --- !u!50 &244462529
 Rigidbody2D:
